@@ -67,33 +67,33 @@ contains
 
   pure subroutine assign_array(self, a)
     class(Field), intent(in out) :: self
-    real(real32), intent(in) :: a(:,:)
+    real(PRECISION_), intent(in) :: a(:,:)
     self % data = a
   end subroutine assign_array
 
   pure subroutine assign_const_int(self, a)
     class(Field), intent(in out) :: self
-    integer(real32), intent(in) :: a
+    integer(PRECISION_), intent(in) :: a
     self % data = a
   end subroutine assign_const_int
 
   pure subroutine assign_const_real(self, a)
     class(Field), intent(in out) :: self
-    real(real32), intent(in) :: a
+    real(PRECISION_), intent(in) :: a
     self % data = a
   end subroutine assign_const_real
 
   pure function diffx(input_field)
     ! Returns the finite difference in x of input_field as a 2-d array.
     class(Field), intent(in) :: input_field
-    real(real32), allocatable :: diffx(:,:)
+    real(PRECISION_), allocatable :: diffx(:,:)
     diffx = diffx_real(input_field % data)
   end function diffx
 
   pure function diffy(input_field)
     ! Returns the finite difference in y of input_field as a 2-d array.
     class(Field), intent(in) :: input_field
-    real(real32), allocatable :: diffy(:,:)
+    real(PRECISION_), allocatable :: diffy(:,:)
     diffy = diffy_real(input_field % data)
   end function diffy
 
@@ -101,8 +101,8 @@ contains
     ! Performs a gather of field data to image.
     class(Field), intent(in) :: self
     integer(int32), intent(in) :: image
-    real(real32), allocatable :: gather_coarray(:,:)[:]
-    real(real32) :: gather(self % dims(1), self % dims(2))
+    real(PRECISION_), allocatable :: gather_coarray(:,:)[:]
+    real(PRECISION_) :: gather(self % dims(1), self % dims(2))
     allocate(gather_coarray(self % dims(1), self % dims(2))[*])
     associate(is => self % lb(1), ie => self % ub(1),&
               js => self % lb(2), je => self % ub(2))
@@ -115,7 +115,7 @@ contains
 
   pure subroutine set_gaussian(self, decay, ic, jc)
     class(Field), intent(in out) :: self
-    real(real32), intent(in) :: decay ! the rate of decay of gaussian
+    real(PRECISION_), intent(in) :: decay ! the rate of decay of gaussian
     integer(int32), intent(in) :: ic, jc ! center indices of the gaussian blob
     integer(int32) :: i, j
     do concurrent(i = self % lb(1)-1:self % ub(1)+1,&
@@ -132,35 +132,35 @@ contains
 
   pure type(Field) function field_add_real(self, x) result(res)
     class(Field), intent(in) :: self
-    real(real32), intent(in) :: x(:,:)
+    real(PRECISION_), intent(in) :: x(:,:)
     res = self
     res = self % data + x
   end function field_add_real
 
   pure type(Field) function real_add_field(x, self) result(res)
     class(Field), intent(in) :: self
-    real(real32), intent(in) :: x(:,:)
+    real(PRECISION_), intent(in) :: x(:,:)
     res = self
     res = self % data + x
   end function real_add_field
 
   pure type(Field) function field_div_real(self, x) result(res)
     class(Field), intent(in) :: self
-    real(real32), intent(in) :: x
+    real(PRECISION_), intent(in) :: x
     res = self
     res = self % data / x
   end function field_div_real
 
   pure type(Field) function field_mult_array(self, x) result(res)
     class(Field), intent(in) :: self
-    real(real32), intent(in) :: x(:,:)
+    real(PRECISION_), intent(in) :: x(:,:)
     res = self
     res = self % data * x
   end function field_mult_array
 
   pure type(Field) function field_mult_real(self, x) result(res)
     class(Field), intent(in) :: self
-    real(real32), intent(in) :: x
+    real(PRECISION_), intent(in) :: x
     res = self
     res = self % data * x
   end function field_mult_real
@@ -172,7 +172,7 @@ contains
   end function field_mult_field
 
   pure type(Field) function array_mult_field(x, self) result(res)
-    real(real32), intent(in) :: x(:,:)
+    real(PRECISION_), intent(in) :: x(:,:)
     class(Field), intent(in) :: self
     res = self
     res = self % data * x
@@ -180,7 +180,7 @@ contains
 
   pure type(Field) function field_sub_array(self, x) result(res)
     class(Field), intent(in) :: self
-    real(real32), intent(in) :: x(:,:)
+    real(PRECISION_), intent(in) :: x(:,:)
     res = self
     res = self % data - x
   end function field_sub_array
@@ -193,7 +193,7 @@ contains
 
   subroutine sync_edges(self)
     class(Field), intent(in out) :: self
-    real(real32), allocatable :: edge(:,:)[:]
+    real(PRECISION_), allocatable :: edge(:,:)[:]
     integer(int32) :: is, ie, js, je
 
     is = self % lb(1)
@@ -227,7 +227,7 @@ contains
   subroutine write(self, n)
     class(Field), intent(in) :: self
     integer(int32), intent(in) :: n
-    real(real32), allocatable :: gather(:,:)
+    real(PRECISION_), allocatable :: gather(:,:)
     gather = self % gather(1)
     if (this_image() == 1) then
       call write_field(gather, self % name, n)

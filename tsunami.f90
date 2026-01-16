@@ -1,5 +1,5 @@
 program tsunami
-
+  
   ! Tsunami simulator.
   !
   ! Solves the non-linear 2-d shallow water equation system:
@@ -21,13 +21,13 @@ program tsunami
   integer(int32), parameter :: jm = 30 ! grid size in y
   integer(int32), parameter :: num_time_steps = 5000 ! number of time steps
 
-  real(real32), parameter :: dt = 0.02 ! time step [s]
-  real(real32), parameter :: dx = 1 ! grid spacing [m]
-  real(real32), parameter :: dy = 1 ! grid spacing [m]
-  real(real32), parameter :: g = 9.8 ! gravitational acceleration [m/s]
+  real(PRECISION_), parameter :: dt = 0.02 ! time step [s]
+  real(PRECISION_), parameter :: dx = 1 ! grid spacing [m]
+  real(PRECISION_), parameter :: dy = 1 ! grid spacing [m]
+  real(PRECISION_), parameter :: g = 9.8 ! gravitational acceleration [m/s]
 
   integer(int32), parameter :: ic = im/2, jc = jm/2
-  real(real32), parameter :: decay = 0.02
+  real(PRECISION_), parameter :: decay = 0.02
 
   type(Field) :: h, u, v, hm
 
@@ -43,7 +43,7 @@ program tsunami
   call h % sync_edges()
 
   ! set mean water depth
-  hm = 10.
+  hm = real(10., PRECISION_)
 
   call h % write(0)
   call u % write(0)

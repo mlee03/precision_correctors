@@ -1,5 +1,6 @@
 FC = gfortran
-FCFLAGS = -O3 -fcoarray="single"
+CPPFLAGS=-cpp -DPRECISION_=$(PRECISION)
+FCFLAGS = -O0 -g -fcoarray="single"
 
 OBJS = mod_diff.o mod_field.o mod_io.o mod_parallel.o
 
@@ -9,14 +10,16 @@ OBJS = mod_diff.o mod_field.o mod_io.o mod_parallel.o
 all: tsunami
 
 tsunami: tsunami.f90 $(OBJS)
-	$(FC) $(FCFLAGS) $< $(OBJS) -o $@
+	$(FC) $(CPPFLAGS) $(FCFLAGS) $< $(OBJS) -o $@
 
 .f90.o:
-	$(FC) -c $(FCFLAGS) $<
+	$(FC) -c $(CPPFLAGS) $(FCFLAGS) $<
 
 %.o: %.mod
 
 mod_field.o: mod_field.f90 mod_diff.o mod_io.o mod_parallel.o
 
 clean:
-	$(RM) tsunami *.o *.mod
+	$(RM) tsunami *.o *.mod \
+  $(RM) real4/*.dat \
+  $(RM) real8/*.dat \
