@@ -10,7 +10,7 @@ program tsunami
   !
   ! This version is parallelized, and uses derived types.
 
-  use iso_fortran_env, only: int32, real32
+  use iso_fortran_env, only: int32, real32, real64
   use mod_field, only: Field, diffx, diffy
 
   implicit none

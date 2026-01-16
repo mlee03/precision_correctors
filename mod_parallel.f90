@@ -3,7 +3,7 @@ module mod_parallel
   ! A module to provide parallel facilities
   ! to the shallow water solver.
 
-  use iso_fortran_env, only: int32, real32
+  use iso_fortran_env, only: int32, real32, real64
 
   implicit none
 

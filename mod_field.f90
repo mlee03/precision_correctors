@@ -2,7 +2,7 @@ module mod_field
 
   ! Provides the Field class and its methods.
 
-  use iso_fortran_env, only: int32, real32
+  use iso_fortran_env, only: int32, real32, real64
   use mod_diff, only: diffx_real => diffx, diffy_real => diffy
   use mod_io, only: write_field
   use mod_parallel, only: tile_indices, tile_neighbors_2d
@@ -19,7 +19,7 @@ module mod_field
     integer(int32) :: dims(2)
     integer(int32) :: neighbors(4)
     integer(int32) :: edge_size
-    real(real32), allocatable :: data(:,:)
+    real(PRECISION_), allocatable :: data(:,:)
 
   contains
 

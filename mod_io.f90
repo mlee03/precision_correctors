@@ -2,7 +2,7 @@ module mod_io
 
   ! Provides input/output procedures.
 
-  use iso_fortran_env, only: int32, real32
+  use iso_fortran_env, only: int32, real32, real64
 
   implicit none
 
