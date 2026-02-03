@@ -1,4 +1,4 @@
-FC = caf
+FC = gfortran
 FCFLAGS = -O3
 
 OBJS = mod_diff.o mod_field.o mod_io.o mod_parallel.o

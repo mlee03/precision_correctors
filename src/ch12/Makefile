@@ -1,5 +1,5 @@
-FC = caf
-FCFLAGS = -O3
+FC = mpif90
+FCFLAGS = -O3 -fcoarray='single'
 
 OBJS = mod_diff.o mod_field.o mod_io.o mod_parallel.o
 

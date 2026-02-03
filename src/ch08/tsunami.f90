@@ -17,8 +17,8 @@ program tsunami
 
   integer(int32) :: n
 
-  integer(int32), parameter :: im = 101 ! grid size in x
-  integer(int32), parameter :: jm = 101 ! grid size in y
+  integer(int32), parameter :: im = 201 ! grid size in x
+  integer(int32), parameter :: jm = 201 ! grid size in y
   integer(int32), parameter :: num_time_steps = 1000 ! number of time steps
 
   real(real32), parameter :: dt = 0.02 ! time step [s]
